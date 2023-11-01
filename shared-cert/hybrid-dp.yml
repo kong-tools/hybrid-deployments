@@ -1,0 +1,31 @@
+image:
+  repository: kong/kong-gateway
+  tag: "3.4"
+
+env:
+  role: data_plane
+  cluster_control_plane: control-kong-cluster.kong-cp.svc.cluster.local:8005
+  cluster_telemetry_endpoint: control-kong-clustertelemetry.kong-cp.svc.cluster.local:8006
+  lua_ssl_trusted_certificate: /etc/secrets/kong-cluster-cert/tls.crt
+  cluster_cert: /etc/secrets/kong-cluster-cert/tls.crt
+  cluster_cert_key: /etc/secrets/kong-cluster-cert/tls.key
+
+secretVolumes:
+- kong-cluster-cert
+
+ingressController:
+  enabled: false
+
+enterprise:
+  enabled: false
+  vitals:
+    enabled: false
+
+manager:
+  enabled: false
+
+portal:
+  enabled: false
+
+portalapi:
+  enabled: false

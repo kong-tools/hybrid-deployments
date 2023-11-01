@@ -1,0 +1,52 @@
+image:
+  repository: kong/kong-gateway
+  tag: "3.4"
+
+env:
+  database: postgres
+  role: control_plane
+  admin_gui_api_url: "http://localhost:8001"
+  admin_gui_url: "http://localhost:8002"
+  cluster_cert: /etc/secrets/kong-cluster-cert/tls.crt
+  cluster_cert_key: /etc/secrets/kong-cluster-cert/tls.key
+
+admin:
+  enabled: true
+  http:
+    enabled: true
+
+cluster:
+  enabled: true
+  tls:
+    enabled: true
+
+clustertelemetry:
+  enabled: true
+  tls:
+    containerPort: 8006
+    enabled: true
+    servicePort: 8006
+    type: ClusterIP
+
+proxy:
+  enabled: false
+
+secretVolumes:
+- kong-cluster-cert
+
+postgresql:
+  enabled: true
+
+ingressController:
+  enabled: false
+
+enterprise:
+  enabled: true
+  vitals:
+    enabled: false
+
+portal:
+  enabled: false
+
+portalapi:
+  enabled: false

@@ -1,0 +1,16 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: sample-certificate # Name of the kubernetes object Certificate
+  namespace: kong # namespace to store the kubernetes object
+spec:
+  commonName: cert.example.in # Certificate Common Name
+  dnsNames:
+  - 'cert.example.in' # Certificate dns names
+  privateKey:
+    encoding: PKCS8
+  secretName: sample-tls-secret # name of the kubernetes secret where the certificate will be stored
+  issuerRef:
+    name: my-ca-issuer # cluster issuer to be used (prod or staging)
+    kind: ClusterIssuer

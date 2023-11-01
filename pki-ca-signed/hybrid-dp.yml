@@ -1,0 +1,46 @@
+image:
+  repository: kong/kong-gateway
+  tag: "3.4"
+
+env:
+  role: data_plane
+  cluster_control_plane: control-kong-cluster.kong-cp.svc.cluster.local:8005
+  cluster_telemetry_endpoint: control-kong-clustertelemetry.kong-cp.svc.cluster.local:8006
+  cluster_cert: /etc/cert-manager/proxy/tls.crt
+  cluster_cert_key: /etc/cert-manager/proxy/tls.key
+  cluster_ca_cert: /etc/cert-manager/proxy/ca.crt
+  cluster_mtls: pki
+  cluster_server_name: cluster.example.in
+  log_level: debug
+
+ingressController:
+  enabled: false
+
+enterprise:
+  enabled: true
+  # See instructions regarding enterprise licenses at https://github.com/Kong/charts/blob/master/charts/kong/README.md#kong-enterprise-license
+  license_secret: kong-enterprise-license # CHANGEME
+  vitals:
+    enabled: false
+
+manager:
+  enabled: false
+
+portal:
+  enabled: false
+
+portalapi:
+  enabled: false
+
+certificates:
+  enabled: true
+  clusterIssuer: letsencrypt-issuer-staging
+  proxy:
+    enabled: true
+    commonName: api.example.in
+  cluster:
+    enabled: false
+  admin:
+    enabled: false
+  portal:
+    enabled: false
